@@ -14,7 +14,8 @@ const STARTERS = [
 ];
 
 export default function Chat() {
-  const { messages, sendMessage, status, error, clearError } = useChat();
+  const { messages, sendMessage, status, error, clearError, setMessages, stop } =
+    useChat();
   const [input, setInput] = useState("");
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -30,6 +31,14 @@ export default function Chat() {
     if (!trimmed || busy) return;
     clearError();
     sendMessage({ text: trimmed });
+    setInput("");
+    inputRef.current?.focus();
+  }
+
+  function newConversation() {
+    stop();
+    clearError();
+    setMessages([]);
     setInput("");
     inputRef.current?.focus();
   }
@@ -114,7 +123,28 @@ export default function Chat() {
             submit(input);
           }}
         >
-          <div className="flex items-end gap-2 rounded-2xl border border-neutral-300 dark:border-neutral-700 bg-[var(--background)] shadow-lg px-4 py-3 focus-within:border-neutral-500 transition-colors">
+          <div className="flex items-end gap-2 rounded-2xl border border-neutral-300 dark:border-neutral-700 bg-[var(--background)] shadow-lg px-3 py-3 focus-within:border-neutral-500 transition-colors">
+            {messages.length > 0 && (
+              <button
+                type="button"
+                onClick={newConversation}
+                title="Start a new conversation"
+                className="shrink-0 flex items-center gap-1.5 text-sm text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 border border-neutral-300 dark:border-neutral-700 hover:border-neutral-500 rounded-full px-3 h-9 transition-colors cursor-pointer"
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.75"
+                  strokeLinecap="round"
+                >
+                  <path d="M8 3.5v9M3.5 8h9" />
+                </svg>
+                <span className="hidden sm:inline">New chat</span>
+              </button>
+            )}
             <textarea
               ref={inputRef}
               value={input}
@@ -126,8 +156,12 @@ export default function Chat() {
                 }
               }}
               rows={1}
-              placeholder="Ask a hard question…"
-              className="flex-1 resize-none bg-transparent outline-none placeholder:text-neutral-400 max-h-40"
+              placeholder={
+                messages.length > 0
+                  ? "Ask a follow-up, or start a new chat…"
+                  : "Ask a hard question…"
+              }
+              className="flex-1 resize-none bg-transparent outline-none placeholder:text-neutral-400 max-h-40 py-1.5"
             />
             <button
               type="submit"
