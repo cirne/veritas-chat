@@ -50,9 +50,6 @@ export async function POST(req: Request) {
         theology: "default",
         profile: "universal_explorer",
         max_words: 400,
-        // Preflight validates the latest user turn in isolation and rejects
-        // short follow-ups like "sure" / "yes" even when history is present.
-        skip_preflight: true,
       },
     },
   });
