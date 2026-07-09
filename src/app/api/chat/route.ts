@@ -48,7 +48,10 @@ export async function POST(req: Request) {
     providerOptions: {
       gamaliel: {
         theology: "default",
-        profile: "universal_explorer",
+        // Lowest assumed Bible literacy — matches skeptics who aren't
+        // coming to read Scripture, just to pressure-test claims.
+        profile: "curious_explorer",
+        bible_id: "eng-niv",
         max_words: 400,
       },
     },
