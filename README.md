@@ -32,7 +32,7 @@ Open [http://localhost:3001](http://localhost:3001).
 `src/app/api/chat/route.ts` proxies chat to `https://api.gamaliel.ai/v1` using the AI SDK's OpenAI-compatible provider. It adds:
 
 - A system prompt tuned for skeptics (reason first, scripture as footnote, steelman objections, no preaching)
-- Gamaliel-specific params (`theology`, `profile: curious_explorer`, `bible_id: eng-niv`, `max_words`) via provider options
+- Gamaliel-specific params (`theology`, `profile: curious_explorer`, `bible_id: eng-us-niv`, `max_words`) via provider options
 
 The UI (`src/components/Chat.tsx`) is a streaming chat with starter questions and markdown rendering. Conversation history lives client-side only — Gamaliel is stateless and no auth or persistence exists in v0.
 

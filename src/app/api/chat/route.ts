@@ -51,7 +51,7 @@ export async function POST(req: Request) {
         // Lowest assumed Bible literacy — matches skeptics who aren't
         // coming to read Scripture, just to pressure-test claims.
         profile: "curious_explorer",
-        bible_id: "eng-niv",
+        bible_id: "eng-us-niv",
         max_words: 400,
       },
     },
