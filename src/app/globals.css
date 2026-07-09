@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Markdown styling for assistant messages */
+.prose-chat {
+  line-height: 1.65;
+}
+.prose-chat p,
+.prose-chat ul,
+.prose-chat ol,
+.prose-chat blockquote {
+  margin-bottom: 0.75em;
+}
+.prose-chat p:last-child,
+.prose-chat ul:last-child,
+.prose-chat ol:last-child {
+  margin-bottom: 0;
+}
+.prose-chat ul {
+  list-style: disc;
+  padding-left: 1.5em;
+}
+.prose-chat ol {
+  list-style: decimal;
+  padding-left: 1.5em;
+}
+.prose-chat li {
+  margin-bottom: 0.25em;
+}
+.prose-chat h1,
+.prose-chat h2,
+.prose-chat h3,
+.prose-chat h4 {
+  font-weight: 600;
+  margin: 1em 0 0.5em;
+}
+.prose-chat h1 {
+  font-size: 1.2em;
+}
+.prose-chat h2 {
+  font-size: 1.1em;
+}
+.prose-chat h3,
+.prose-chat h4 {
+  font-size: 1em;
+}
+.prose-chat a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  color: #2563eb;
+}
+@media (prefers-color-scheme: dark) {
+  .prose-chat a {
+    color: #60a5fa;
+  }
+}
+.prose-chat blockquote {
+  border-left: 3px solid #d4d4d4;
+  padding-left: 1em;
+  font-style: italic;
+  color: #737373;
+}
+@media (prefers-color-scheme: dark) {
+  .prose-chat blockquote {
+    border-left-color: #404040;
+    color: #a3a3a3;
+  }
+}
+.prose-chat strong {
+  font-weight: 600;
+}
+.prose-chat code {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.9em;
+}
