@@ -11,6 +11,8 @@ const STARTERS = [
   "Can a rational person believe in miracles?",
   "Doesn't science make God unnecessary?",
   "Why would a loving God send people to hell?",
+  "Does God hate gay people?",
+  "Why are Christians so judgmental?",
 ];
 
 export default function Chat() {
