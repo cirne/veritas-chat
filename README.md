@@ -1,20 +1,28 @@
 # Veritas
 
-A chat app for skeptics with hard questions about Jesus, Christianity, and the Bible.
+**An open-source example app** built on the [Gamaliel API](https://developer.gamaliel.ai) — a chat interface for people with hard questions about Jesus, Christianity, and the Bible.
 
-Veritas is not a Bible reader. It's built for people who don't accept scripture as an authority — atheists, agnostics, and doubters — so answers lead with reason, history, and philosophy. Scripture grounds every answer, but it's presented as the source of an idea the reader can evaluate on its merits, not as proof by assertion.
+Veritas is for skeptics: atheists, agnostics, and honest doubters who won't take "because the Bible says so" as an answer. It leads with reason — history, philosophy, logic, and lived experience — and treats scripture as the source of an idea you can evaluate on its merits, not as proof by assertion.
+
+Bring your toughest objection. You'll get a reasoned reply, not a sermon.
+
+## Why this exists
+
+Gamaliel is an OpenAI-compatible biblical chat API. This repo shows one way to shape it for a skeptical audience: a custom system prompt, a low Bible-literacy profile, and a UI that invites pressure-testing rather than devotion.
+
+Fork it. Change the prompt. Point it at a different audience. Use it as a starting point for your own Gamaliel-powered app.
 
 ## Stack
 
 - [Next.js](https://nextjs.org) (App Router) + TypeScript + Tailwind CSS
-- [Vercel AI SDK](https://ai-sdk.dev) (`ai` + `@ai-sdk/react`) for streaming chat
-- [Gamaliel Public API](https://developer.gamaliel.ai) — an OpenAI-compatible biblical chat API (BYOK), customized via a system prompt for a skeptical audience
+- [Vercel AI SDK](https://ai-sdk.dev) for streaming chat
+- [Gamaliel Public API](https://developer.gamaliel.ai) — OpenAI-compatible, bring-your-own-key
 
 ## Setup
 
 ```bash
 npm install
-cp .env.example .env.local   # then fill in your key
+cp .env.example .env.local   # add your OpenAI API key
 npm run dev
 ```
 
@@ -29,15 +37,15 @@ Open [http://localhost:3001](http://localhost:3001).
 
 ## How it works
 
-`src/app/api/chat/route.ts` proxies chat to `https://api.gamaliel.ai/v1` using the AI SDK's OpenAI-compatible provider. It adds:
+`src/app/api/chat/route.ts` proxies chat to `https://api.gamaliel.ai/v1` via the AI SDK's OpenAI-compatible provider. It adds:
 
-- A system prompt tuned for skeptics (reason first, scripture as footnote, steelman objections, no preaching)
-- Gamaliel-specific params (`theology`, `profile: curious_explorer`, `bible_id: eng-us-niv`, `max_words`) via provider options
+- A system prompt tuned for skeptics — reason first, scripture as footnote, steelman objections, no preaching
+- Gamaliel-specific options (`theology`, `profile: curious_explorer`, `bible_id`, `max_words`) via provider options
 
-The UI (`src/components/Chat.tsx`) is a streaming chat with starter questions and markdown rendering. Conversation history lives client-side only — Gamaliel is stateless and no auth or persistence exists in v0.
+The UI (`src/components/Chat.tsx`) is a streaming chat with starter questions and markdown rendering. History lives client-side only — no auth, no persistence.
 
-Note: Gamaliel limits conversations to 20 user messages; start a new chat to continue past that.
+> Gamaliel caps conversations at 20 user messages. Start a new chat to keep going.
 
 ## Deploy
 
-Deploys to [Vercel](https://vercel.com) out of the box. Set `OPENAI_API_KEY` in the Vercel project's environment variables.
+Deploys to [Vercel](https://vercel.com) out of the box. Set `OPENAI_API_KEY` in the project environment variables.
